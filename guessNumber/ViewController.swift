@@ -27,23 +27,25 @@ class ViewController: UIViewController,UITextFieldDelegate {
                 return n > 0 ? n % 10 : nil
             }.reduce(0, +)
     }
-    func clear(){
-        enterText.text = " "
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        enterText.text = ""
+        announceLabel.isHidden = true
     }
 
     @IBAction func readYourMind(_ sender: UIButton) {
         
         let number = Int(enterText.text!)
         mindNumber = ((number!*10+((digitSum(number!)/9)+1)*9 - digitSum(number!)))/9
-        clear()
         textFieldShouldReturn(enterText)
+        announceLabel.isHidden = false
         announceLabel.text = "你心中所想數字是:\n \(mindNumber)"
     }
     
-    
+    @IBAction func clearResult(_ sender: UIButton) {
+        viewDidLoad()
+    }
 }
 
